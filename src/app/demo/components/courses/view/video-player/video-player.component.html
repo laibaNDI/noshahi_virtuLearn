@@ -1,0 +1,26 @@
+<div class="video-player-container">
+  <h2>{{ topics[currentTopicIndex].title }} - {{ currentStep | titlecase }}</h2>
+
+  <ng-container *ngIf="currentStep === 'video'; else quizOrNotes">
+    <video controls autoplay [src]="currentUrl" class="video-element">
+      Your browser does not support the video tag.
+    </video>
+  </ng-container>
+
+  <ng-template #quizOrNotes>
+    <iframe *ngIf="currentStep !== 'video'" [src]="currentUrl" width="80%" height="400px"></iframe>
+  </ng-template>
+
+  <div class="controls">
+    <button class="control-btn prev-btn" (click)="prevStep()" [disabled]="currentTopicIndex === 0 && currentStep === 'video'">
+      <i class="pi pi-chevron-left"></i> Previous
+    </button>
+
+    <button class="control-btn next-btn" (click)="nextStep()">
+      Next <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
+</div> 
+
+
+

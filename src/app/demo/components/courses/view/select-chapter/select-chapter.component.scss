@@ -1,0 +1,282 @@
+// /* Header */
+// .header {
+//   display: flex;
+//   align-items: center;
+//   background-color: #34c759;
+//   padding: 15px;
+//   color: white;
+//   font-size: 20px;
+//   font-weight: bold;
+//   border-bottom: 2px solid #34c759;  /* Border under the header */
+// }
+
+// .back-btn {
+//   background: none;
+//   border: none;
+//   color: white;
+//   font-size: 32px;
+//   cursor: pointer;
+//   margin-right: 15px;
+// }
+
+// .nav-btn {
+//   background: none;
+//   border: none;
+//   color: white;
+//   font-size: 32px;
+//   cursor: pointer;
+//   margin-left: 15px;
+//   text-align: right;
+// }
+
+// /* Section Heading */
+// .section-heading {
+//   text-align: center;
+//   font-size: 24px;
+//   color: #34c759;
+//   margin: 20px 0;
+// }
+
+// /* Border Line */
+// .border-line {
+//   width: 80%;
+//   margin: 0 auto;
+//   border-top: 2px solid #34c759;
+//   margin-bottom: 20px;
+// }
+
+// /* Timeline Container */
+// .timeline {
+//   position: relative;
+//   max-width: 800px;
+//   margin: 0 auto;
+//   padding: 20px 0;
+// }
+
+// /* Vertical Line in Timeline */
+// .timeline::after {
+//   content: "";
+//   position: absolute;
+//   width: 3px;
+//   background-color: #34c759;
+//   top: 0;
+//   bottom: 0;
+//   left: 50%;
+//   transform: translateX(-50%);
+// }
+
+// /* Chapter Box */
+// .chapter-box {
+//   position: relative;
+//   width: 50%;
+//   padding: 10px 20px;
+//   box-sizing: border-box;
+//   display: flex;
+//   align-items: center;
+// }
+
+// /* Horizontal Line in Chapter Box */
+// .horizontal-line {
+//   position: absolute;
+//   width: 50px;
+//   height: 3px;
+//   background-color: #34c759;
+//   top: 50%;
+// }
+
+// /* Align Left */
+// .left {
+//   left: 0;
+//   justify-content: flex-end;
+// }
+
+// .left .horizontal-line {
+//   right: 0;
+// }
+
+// /* Align Right */
+// .right {
+//   left: 50%;
+//   justify-content: flex-start;
+// }
+
+// .right .horizontal-line {
+//   left: 0;
+// }
+
+// /* Chapter Content */
+// .content {
+//   padding: 10px;
+//   border-radius: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   cursor: pointer;
+//   transition: transform 0.3s ease;
+//   margin-left: 80px;
+//   margin-right: 80px;
+// }
+
+// .content:hover {
+//   transform: scale(1.05);
+// }
+
+// /* Chapter Image */
+// .content img {
+//   width: 80px;
+//   height: 80px;
+//   object-fit: cover;
+//   border-radius: 50%;
+//   display: block;
+// }
+
+// /* Chapter Title */
+// .chapter-title {
+//   font-size: 16px;
+//   font-weight: bold;
+//   margin-top: 8px;
+//   color: #333;
+// }
+/* Header */
+.header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  color: #666; /* Changed to gray */
+  font-size: 20px;
+  font-weight: 600; /* Increased boldness */
+  font-family: sans-serif, 'Poppins';
+  margin: -60px auto;
+}
+
+.back-btn,
+.nav-btn,
+.home-btn {
+  background: none;
+  border: none;
+  color: green;
+  font-size: 72px; /* Increased icon size */
+  padding: 20px;
+  cursor: pointer;
+}
+.pi-home:before{
+  font-size: 44px;
+}
+.pi-arrow-left:before {
+  font-size: 32px;
+}
+
+.home-btn {
+  font-size: 72px; /* Increased home icon size */
+}
+
+/* Section Heading */
+.section-heading {
+  text-align: center;
+  color: #34c759;
+  margin-bottom: 10px; /* Reduced space */
+}
+
+/* Border Line */
+.border-line {
+  width: 80%;
+  margin: 0 auto;
+  border-top: 2px solid #34c759;
+  margin-bottom: 50px; /* Reduced space */
+}
+
+/* Timeline Container */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 0; /* Adjusted padding */
+}
+
+/* Vertical Line */
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  background-color: #34c759;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Chapter Box */
+.chapter-box {
+  position: relative;
+  width: 50%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+/* Horizontal Line */
+.horizontal-line {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: #34c759;
+  top: 50%;
+}
+
+/* Align Left */
+.left {
+  left: 0;
+  justify-content: flex-end;
+}
+
+.left .horizontal-line {
+  right: 0;
+}
+
+/* Align Right */
+.right {
+  left: 50%;
+  justify-content: flex-start;
+}
+
+.right .horizontal-line {
+  left: 0;
+}
+
+/* Chapter Content */
+.content {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.content:hover {
+  transform: scale(1.05);
+}
+
+/* Chapter Image */
+.content img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Chapter Title */
+.chapter-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #333;
+}
+

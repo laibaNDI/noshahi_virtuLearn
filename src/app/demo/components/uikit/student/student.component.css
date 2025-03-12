@@ -1,0 +1,57 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+}
+  
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .grid .col-12, .grid .lg\:col-6 {
+    margin-bottom: 24px; /* Increased space between fields */
+  }
+  
+  span.p-input-icon-left {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  span.p-input-icon-left i {
+    position: absolute;
+    left: 12px; /* Space for icon */
+    font-size: 1.2rem;
+    color:  green;
+  }
+  
+  input[pInputText], select {
+    width: 100%;
+    padding: 10px 90px 10px 40px; /* Padding adjusted for left icon space */
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+  
+  input[pInputText]:focus {
+    border-color: #22c55e; /* Saga Green color on focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+  }
+  
+  button {
+    font-size: 16px;
+  }
+  
+  .p-button-success {
+    width: 100%;
+  }
+  

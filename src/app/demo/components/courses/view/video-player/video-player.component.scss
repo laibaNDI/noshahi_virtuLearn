@@ -1,0 +1,69 @@
+.video-player-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.video-element {
+  width: 80%;
+  max-width: 800px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Controls styling */
+.controls {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.control-btn {
+  background-color: green;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Playlist dropdown styling */
+.playlist {
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 200px;
+}
+
+.playlist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlist li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.playlist li:last-child {
+  border-bottom: none;
+}
+
+.playlist li.active {
+  background-color: green;
+  color: #fff;
+}

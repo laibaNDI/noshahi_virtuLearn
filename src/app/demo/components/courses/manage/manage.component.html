@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="header">
+        <h2 class="heading">Manage Books</h2>
+        <p-button label="New Book" icon="pi pi-plus" (click)="openNew()" class="p-button-success right-align"></p-button>
+    </div>
+
+    <p-table #dt [value]="books" [(selection)]="selectedBooks" dataKey="id" class="p-datatable-sm">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 9rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Book Name</th>
+                <th>Class</th>
+                <th colspan="5">
+                    <div class="delete-header" *ngIf="selectedBooks.length > 0">
+                        <button pButton type="button" icon="pi pi-trash" label="Delete Selected" 
+                                class="p-button-danger p-button-sm" 
+                                (click)="deleteSelectedBooks()" [disabled]="selectedBooks.length === 0">
+                        </button>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-book>
+            <tr [pSelectableRow]="book" (click)="navigateToChapters(book)">
+                <td (click)="$event.stopPropagation()">
+                    <p-tableCheckbox [value]="book"></p-tableCheckbox>
+                </td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description }}</td>
+                <td (click)="$event.stopPropagation()" class="action-buttons">
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm-li" (click)="editBook(book)"></button>
+                    <button pButton type="button" icon="pi pi-eye" class="p-button-text p-button-sm-bi" (click)="viewBook(book)"></button>
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="deleteBook(book)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="bookDialog" [modal]="true" class="styled-dialog">
+    <ng-template pTemplate="header">
+        <h3 class="form-title">{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="form-container">
+            <div class="form-group">
+                <h5>Class</h5>
+                <p-dropdown [options]="availableClasses" [(ngModel)]="bookForm.class" placeholder="Select Class" [showClear]="true" class="full-width"></p-dropdown>
+            </div>
+            <div class="form-group">
+                <h5>Name <span class="error" *ngIf="errors?.name">* Required</span></h5>
+                <input type="text" pInputText [(ngModel)]="bookForm.name" placeholder="Enter Book Name" class="full-width">
+            </div>
+            <div class="form-group">
+                <h5>Description</h5>
+                <textarea pInputTextarea [(ngModel)]="bookForm.description" placeholder="Enter Book Description" class="full-width textarea"></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="form-footer">
+            <p-button label="Save" icon="pi pi-check" (click)="saveBook()" class="p-button-success"></p-button>
+            <p-button label="Cancel" icon="pi pi-times" (click)="bookDialog = false" class="p-button-secondary"></p-button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="viewDialog" [modal]="true" class="styled-dialog">
+    <ng-template pTemplate="header">
+        <h3 class="form-title">Book Details</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="form-container">
+            <div class="form-group">
+                <h5>Class:</h5>
+                <p>{{ selectedBook?.class }}</p>
+            </div>
+            <div class="form-group">
+                <h5>Name:</h5>
+                <p>{{ selectedBook?.name }}</p>
+            </div>
+            <div class="form-group">
+                <h5>Description:</h5>
+                <p>{{ selectedBook?.description }}</p>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Close" icon="pi pi-times" (click)="viewDialog = false" class="p-button-secondary"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog header="Delete Book" icon="pi pi-exclamation-circle text-red" class="red"></p-confirmDialog>
+<p-toast></p-toast>

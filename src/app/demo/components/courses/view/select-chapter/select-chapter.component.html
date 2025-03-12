@@ -1,0 +1,26 @@
+
+<div class="header">
+  <button class="back-btn" (click)="goBack()">
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <h2 class="title">
+    {{ selectedBook.title }} - Grade {{ grade }}
+  </h2>
+  <button class="home-btn" (click)="goHome()">
+    <i class="pi pi-home"></i>
+  </button>
+</div>
+
+<h5 class="section-heading">Select Chapter</h5>
+
+<hr class="border-line" />
+
+<div class="timeline">
+  <div *ngFor="let chapter of chapters; let i = index" class="chapter-box" [ngClass]="{ 'left': i % 2 === 0, 'right': i % 2 !== 0 }">
+    <div class="horizontal-line"></div>
+    <div class="content" (click)="selectChapter(chapter)">
+      <img [src]="chapter.image" alt="{{ chapter.title }}" />
+      <span class="chapter-title">{{ chapter.title }}</span>
+    </div>
+  </div>
+</div>

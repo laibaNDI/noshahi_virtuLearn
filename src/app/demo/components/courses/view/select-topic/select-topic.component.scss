@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: green;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .title {
+  font-size: 20px;
+  font-weight: bold;
+  // color: #333;
+  color: #fff;
+}
+
+/* Buttons */
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+}
+
+button:hover {
+  color: orangered; /* Orange Accent */
+}
+
+.back-btn i,
+.home-btn i {
+  font-size: 24px;
+}
+
+/* Section Heading */
+.section-heading {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Topic Boxes */
+.topic-boxes {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Individual Topics */
+.topic {
+  color: white;
+  background: green;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdown-btn i {
+  font-size: 18px;
+}
+
+/* Subtopic Box */
+.subtopic-box {
+  background: #f9f9f9;
+  color: green;
+  border-radius: 8px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+/* Subtopic Item */
+.subtopic-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.subtopic-item:last-child {
+  border-bottom: none;
+}
+
+/* Subtopic Icons */
+.subtopic-icons i {
+  margin: 0 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: green;
+}
+
+.subtopic-icons i:hover {
+  color: green; /* Orange Accent */
+}
+
+/* Video Player */
+.video-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.video-container video {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .header {
+    padding: 10px;
+  }
+
+  .header .title {
+    font-size: 18px;
+  }
+
+  .section-heading {
+    font-size: 20px;
+  }
+
+  .topic-header {
+    font-size: 16px;
+  }
+
+  .subtopic-item {
+    font-size: 14px;
+  }
+
+  .subtopic-icons i {
+    font-size: 18px;
+    color: green;
+  }
+}
+.subtopic-icons i.pi-video {
+  color: green; /* Video icon green */
+}
+
+.subtopic-icons i.pi-video:hover {
+  color: darkgreen; /* Dark green on hover */
+}

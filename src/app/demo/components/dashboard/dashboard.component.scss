@@ -1,0 +1,19 @@
+a {
+    color: rgb(95, 15, 95); /* Set the default link color to orange */
+    text-decoration: none; /* Remove underline for cleaner look */
+  }
+  
+  a:hover {
+    color: rgb(238, 13, 238); /* Slightly darker shade on hover */
+  }
+  
+  .btn-light {
+    color: orange; /* Override the color for Bootstrap's `.btn-light` */   
+  }
+  
+  .btn-light:hover {
+    color: orangered;
+  }
+  .card-text{
+    color: black;
+  }

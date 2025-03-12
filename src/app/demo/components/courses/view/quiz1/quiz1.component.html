@@ -1,0 +1,38 @@
+<form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+  <div class="quiz-container">
+    <!-- Header Section -->
+    <div class="quiz-header">
+      <h2>{{ topicName }} - Quiz</h2>
+    </div>
+
+    <!-- Quiz Questions -->
+    <div class="quiz-card">
+      <div *ngFor="let q of questions; let i = index">
+        <p class="quiz-question">{{ q.question }}</p>
+        <div class="options">
+          <div *ngFor="let option of q.options" class="option">
+            <input
+              type="radio"
+              [formControlName]="'question' + i"
+              [value]="option"
+              id="question{{ i }}-option{{ option }}"
+            />
+            <label [for]="'question' + i + '-option' + option">{{ option }}</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button Container -->
+      <div class="button-container">
+        <button type="button" class="nav-btn" (click)="prevStep()">Previous</button>
+        <button type="submit" class="submit-btn">Submit</button>
+        <button type="button" class="nav-btn" (click)="nextStep()">Next</button>
+      </div>
+
+      <!-- Score Display -->
+      <div *ngIf="submitted" class="score-box">
+        <p>Your score: <span class="score">{{ score }} / {{ questions.length }}</span></p>
+      </div>
+    </div>
+  </div>
+</form>

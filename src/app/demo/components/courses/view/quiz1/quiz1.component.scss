@@ -1,0 +1,102 @@
+/* Quiz Container */
+.quiz-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2{
+  color: #fff;
+}
+
+/* Header */
+.quiz-header {
+  text-align: center;
+  background-color: green;
+  color: white;
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Quiz Box */
+.quiz-card {
+  padding: 20px;
+  border: 2px solid green;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Questions */
+.quiz-question {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="radio"] {
+  accent-color: green;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.nav-btn, .submit-btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-btn {
+  background-color: green;
+  color: white;
+}
+
+.nav-btn:hover {
+  background-color: rgb(9, 182, 9);
+}
+
+.submit-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.submit-btn:hover {
+  background-color: #e68900;
+}
+
+/* Score Box */
+.score-box {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.score {
+  color: green;
+}

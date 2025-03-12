@@ -1,0 +1,145 @@
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Student Registration</h1>
+    <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+      <div class="grid formgrid">
+        <!-- Full Name -->
+        <div class="col-12 mb-2 lg:col-6">
+          <span class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input
+              type="text"
+              pInputText
+              name="name"
+              [(ngModel)]="student.name"
+              placeholder="Full Name"
+              required
+              #name="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Email -->
+        <div class="col-12 mb-2 lg:col-6">
+          <span class="p-input-icon-left">
+            <i class="pi pi-envelope"></i>
+            <input
+              type="email"
+              pInputText
+              name="email"
+              [(ngModel)]="student.email"
+              placeholder="Email Address"
+              required
+              #email="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Phone -->
+        <div class="col-12 mb-2 lg:col-6">
+          <span class="p-input-icon-left">
+            <i class="pi pi-phone"></i>
+            <input
+              type="tel"
+              pInputText
+              name="phone"
+              [(ngModel)]="student.phone"
+              placeholder="Phone Number"
+              required
+              #phone="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Date of Birth -->
+        <div class="col-12 mb-2 lg:col-6">
+          <span class="p-input-icon-left">
+            <i class="pi pi-calendar"></i>
+            <input
+              type="date"
+              pInputText
+              name="dob"
+              [(ngModel)]="student.dob"
+              required
+              #dob="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Gender -->
+        <div class="col-12 mb-2">
+          <label class="mb-2">Gender</label>
+          <div class="p-d-flex p-ai-center p-gap-3">
+            <p-radioButton
+              name="gender"
+              value="male"
+              [(ngModel)]="student.gender"
+              label="Male"
+              required
+              #gender="ngModel"
+            ></p-radioButton>
+            <p-radioButton
+              name="gender"
+              value="female"
+              [(ngModel)]="student.gender"
+              label="Female"
+            ></p-radioButton>
+            <p-radioButton
+              name="gender"
+              value="other"
+              [(ngModel)]="student.gender"
+              label="Other"
+            ></p-radioButton>
+          </div>
+        </div>
+  
+        <!-- Address -->
+        <div class="col-12 mb-2">
+          <span class="p-input-icon-left">
+            <i class="pi pi-map-marker"></i>
+            <input
+              type="text"
+              pInputText
+              name="address"
+              [(ngModel)]="student.address"
+              placeholder="Address"
+              required
+              #address="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Course -->
+        <div class="col-12 mb-2">
+          <span class="p-input-icon-left">
+            <i class="pi pi-book"></i>
+            <input
+              type="text"
+              pInputText
+              name="course"
+              [(ngModel)]="student.course"
+              placeholder="Course Interested In"
+              required
+              #course="ngModel"
+            />
+          </span>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="col-12">
+          <button
+            pButton
+            pRipple
+            type="submit"
+            label="Submit"
+            class="p-button-success"
+          ></button>
+        </div>
+  
+        <!-- Validation Message -->
+        <div *ngIf="showErrorMessage" class="text-danger mt-3">
+          Please fill out all the required fields before submitting.
+        </div>
+      </div>
+    </form>
+  </div>
+  

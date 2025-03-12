@@ -1,0 +1,74 @@
+<!-- <div class="header">
+  <button class="back-btn" (click)="goBack()" aria-label="Go Back">
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <h2 class="title">{{ selectedBook.title }} - {{ grade }}</h2>
+  <button class="home-btn" (click)="goHome()" aria-label="Go Home">
+    <i class="pi pi-home"></i>
+  </button>
+</div>
+
+<h3 class="section-heading">Select Topic</h3>
+<div class="border-line"></div>
+
+<div class="topic-boxes">
+  <div class="topic" *ngFor="let topic of topics">
+    <div class="topic-header">
+      <span>{{ topic.title }}</span>
+      <button class="dropdown-btn" (click)="toggleDropdown(topic)" aria-label="Expand/Collapse Topic">
+        <i class="pi" [ngClass]="{ 'pi-chevron-down': !topic.isOpen, 'pi-chevron-up': topic.isOpen }"></i>
+      </button>
+    </div>
+    <div *ngIf="topic.isOpen" class="subtopic-box">
+      <div *ngFor="let subtopic of topic.subtopics; let i = index" class="subtopic-item">
+        <span>{{ subtopic.name }}</span>
+        <div class="subtopic-icons">
+          <i class="pi pi-video" (click)="playVideo(topic, i)" aria-label="Play Video"></i>
+          <i class="pi pi-question-circle" (click)="navigateTo(subtopic.quiz)" aria-label="Open Quiz"></i>
+          <i class="pi pi-file" (click)="navigateTo(subtopic.notes)" aria-label="Open Notes"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+<div class="header">
+  <button class="back-btn" (click)="goBack()" aria-label="Go Back">
+    <i class="pi pi-arrow-left"></i>
+  </button>
+  <h2 class="title">{{ selectedBook.title }} - {{ grade }}</h2>
+  <button class="home-btn" (click)="goHome()" aria-label="Go Home">
+    <i class="pi pi-home"></i>
+  </button>
+</div>
+
+<h3 class="section-heading">Select Topic</h3>
+<div class="border-line"></div>
+
+<div class="topic-boxes">
+  <div class="topic" *ngFor="let topic of topics">
+    <div class="topic-header">
+      <span>{{ topic.title }}</span>
+      <button class="dropdown-btn" (click)="toggleDropdown(topic)" aria-label="Expand/Collapse Topic">
+        <i class="pi" [ngClass]="{ 'pi-chevron-down': !topic.isOpen, 'pi-chevron-up': topic.isOpen }"></i>
+      </button>
+    </div>
+    <div *ngIf="topic.isOpen" class="subtopic-box">
+      <div *ngFor="let subtopic of topic.subtopics; let i = index" class="subtopic-item">
+        <span>{{ subtopic.name }}</span>
+        <div class="subtopic-icons">
+          <i class="pi pi-video" (click)="playVideo(topic, i)" aria-label="Play Video"></i>
+          <i class="pi pi-question-circle" (click)="navigateTo(subtopic.quiz)" aria-label="Open Quiz"></i>
+          <i class="pi pi-file" (click)="openNotes(subtopic)" aria-label="Open Notes"></i>
+        </div>
+        <a href="assets/math.pdf" target="_blank" (click)="$event.stopPropagation()">Open Notes</a>
+
+      </div>
+    </div>
+  </div>
+</div>

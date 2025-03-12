@@ -1,0 +1,27 @@
+<form (ngSubmit)="enroll()" #enrollForm="ngForm">
+    <label for="class">Class:</label>
+    <select id="class" [(ngModel)]="enrollmentData.class" name="class" required>
+      <option value="">Select Class</option>
+      <option value="Grade 9">Grade 9</option>
+      <option value="Grade 10">Grade 10</option>
+      <option value="Grade 11">Grade 11</option>
+      <option value="Grade 12">Grade 12</option>
+    </select>
+    <div *ngIf="enrollForm.submitted && !enrollmentData.class" style="color: red;">
+      Please select a class.
+    </div>
+  
+    <label for="subjects">Subjects:</label>
+    <div *ngFor="let subject of availableSubjects">
+      <input
+        type="checkbox"
+        id="{{ subject }}"
+        [value]="subject"
+        [(ngModel)]="enrollmentData.subjects"
+        name="subjects"
+      />
+      <label for="{{ subject }}">{{ subject }}</label>
+    </div>
+  
+    <button type="submit" [disabled]="enrollForm.invalid">Enroll</button>
+</form>

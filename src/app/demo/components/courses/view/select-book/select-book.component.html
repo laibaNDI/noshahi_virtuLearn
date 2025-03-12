@@ -1,0 +1,13 @@
+<div class="book-selection">
+  <h1 class="text-center">Select a Book for Grade {{ selectedGrade }}</h1>
+
+  <div class="books-container">
+    <div class="book-card" *ngFor="let book of booksForGrade" (click)="selectBook(book)">
+      <img [src]="book.image" alt="{{ book.title }}" />
+      <h3>{{ book.title }}</h3>
+      <p>{{ book.description }}</p>
+    </div>
+  </div>
+</div>
+
+

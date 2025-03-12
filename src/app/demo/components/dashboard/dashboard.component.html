@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <h1 class="text-center">Principal Dashboard</h1>
+    <div class="row mt-5">
+      <!-- Cards Section -->
+      <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Manage Students</h5>
+            <p class="card-text">View and manage all students.</p>
+            <a href="/students" class="btn btn-light btn-sm">Go to Students</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Manage Teachers</h5>
+            <p class="card-text">View and manage all teachers.</p>
+            <a href="/teachers" class="btn btn-light btn-sm">Go to Teachers</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Manage Courses</h5>
+            <p class="card-text">Add, edit, or remove courses.</p>
+            <a href="/courses/manage" class="btn btn-light btn-sm">Go to Courses</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+          <div class="card-body">
+            <h5 class="card-title">View Analytics</h5>
+            <p class="card-text">Track platform performance and usage.</p>
+            <a href="/analytics" class="btn btn-light btn-sm">View Analytics</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Analytics Section -->
+    <div class="mt-5">
+      <h3>Platform Analytics</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Student Enrollment</h5>
+              <canvas id="enrollmentChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Active Users</h5>
+              <canvas id="activeUsersChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
