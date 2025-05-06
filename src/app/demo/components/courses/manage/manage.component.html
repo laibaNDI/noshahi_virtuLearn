@@ -1,96 +1,165 @@
-<div class="container">
-    <div class="header">
-        <h2 class="heading">Manage Books</h2>
-        <p-button label="New Book" icon="pi pi-plus" (click)="openNew()" class="p-button-success right-align"></p-button>
-    </div>
-
-    <p-table #dt [value]="books" [(selection)]="selectedBooks" dataKey="id" class="p-datatable-sm">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 9rem">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
-                <th>Book Name</th>
-                <th>Class</th>
-                <th colspan="5">
-                    <div class="delete-header" *ngIf="selectedBooks.length > 0">
-                        <button pButton type="button" icon="pi pi-trash" label="Delete Selected" 
-                                class="p-button-danger p-button-sm" 
-                                (click)="deleteSelectedBooks()" [disabled]="selectedBooks.length === 0">
-                        </button>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedCourses()" [disabled]="!selectedCourses || !selectedCourses.length"></button>
                     </div>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-book>
-            <tr [pSelectableRow]="book" (click)="navigateToChapters(book)">
-                <td (click)="$event.stopPropagation()">
-                    <p-tableCheckbox [value]="book"></p-tableCheckbox>
-                </td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.description }}</td>
-                <td (click)="$event.stopPropagation()" class="action-buttons">
-                    <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm-li" (click)="editBook(book)"></button>
-                    <button pButton type="button" icon="pi pi-eye" class="p-button-text p-button-sm-bi" (click)="viewBook(book)"></button>
-                    <button pButton type="button" icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="deleteBook(book)"></button>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
+                    <input type="file" id="fileInput" style="display: none" (change)="importFile($event)">
+                    <button pButton pRipple label="Import" icon="pi pi-download" class="p-button-help ml-2" (click)="triggerFileInput()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="courses" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','category','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedCourses" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Books</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="code">ID <p-sortIcon field="code"></p-sortIcon></th>
+                        <th pSortableColumn="name">Book Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th>Description</th>
+                        <th pSortableColumn="duration">Duration <p-sortIcon field="duration"></p-sortIcon></th>
+                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-course>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="course"></p-tableCheckbox>
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Code</span>
+                            {{course.code || course.id}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Book Name</span>
+                            {{course.name}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Description</span>
+                            {{course.category}}
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Duration</span>
+                            {{course.duration}} hours
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Status</span>
+                            <span [class]="'course-badge status-' + (course.status ? course.status.toLowerCase() : '')">{{course.status}}</span>
+                        </td>
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info mr-2" (click)="viewCourse(course)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editCourse(course)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteCourse(course)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <p-dialog [(visible)]="viewCourseDialog" [style]="{width: '450px'}" header="Course Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="category">Book Name</label>
+                    <input type="text" pInputText id="name" [(ngModel)]="course.name" disabled />
+                </div>
+                <div class="field">
+                    <label for="category">Description</label>
+                    <input type="text" pInputText id="category" [(ngModel)]="course.category" disabled />
+              
+                </div>
+                <div class="field">
+                    <label for="duration">Duration (in hours)</label>
+                    <p-inputNumber id="duration" [(ngModel)]="course.duration" disabled></p-inputNumber>
+                 </div>
+                 <div class="field">
+                    <label for="status">Status</label>
+                    <p>{{ course.status }}</p>
+                </div>
+                
+            </ng-template>
+        </p-dialog>
+        
+        
+        <p-dialog [(visible)]="courseDialog" [style]="{width: '450px'}" header="Course Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="name">Book Name</label>
+                    <input type="text" pInputText id="name" [(ngModel)]="course.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !course.name}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !course.name">Name is required.</small>
+                </div>
+                <div class="field">
+                    <label for="category">Description</label>
+                    <input type="text" pInputText id="category" [(ngModel)]="course.category" required />
+                </div>
+                <div class="field">
+                    <label for="duration">Duration (in hours)</label>
+                    <p-inputNumber id="duration" [(ngModel)]="course.duration" min="1"></p-inputNumber>
+                </div>
+                <div class="field">
+                    <label for="status">Status</label>
+                    <p-dropdown [(ngModel)]="course.status" inputId="status" optionLabel="label" [options]="statuses" placeholder="Select" appendTo="body">
+                    </p-dropdown>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCourse()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteCourseDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="course">Are you sure you want to delete <b>{{course.name}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteCourseDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteCoursesDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span>Are you sure you want to delete selected courses?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteCoursesDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+            </ng-template>
+        </p-dialog>
+        
+        <p-dialog [(visible)]="fieldPopupVisible" [style]="{width: '350px'}" header="{{fieldPopupTitle}}" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <p>{{fieldPopupContent}}</p>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Close" icon="pi pi-times" class="p-button-text" (click)="fieldPopupVisible = false"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
 </div>
 
-<p-dialog [(visible)]="bookDialog" [modal]="true" class="styled-dialog">
-    <ng-template pTemplate="header">
-        <h3 class="form-title">{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h3>
-    </ng-template>
-    <ng-template pTemplate="content">
-        <div class="form-container">
-            <div class="form-group">
-                <h5>Class</h5>
-                <p-dropdown [options]="availableClasses" [(ngModel)]="bookForm.class" placeholder="Select Class" [showClear]="true" class="full-width"></p-dropdown>
-            </div>
-            <div class="form-group">
-                <h5>Name <span class="error" *ngIf="errors?.name">* Required</span></h5>
-                <input type="text" pInputText [(ngModel)]="bookForm.name" placeholder="Enter Book Name" class="full-width">
-            </div>
-            <div class="form-group">
-                <h5>Description</h5>
-                <textarea pInputTextarea [(ngModel)]="bookForm.description" placeholder="Enter Book Description" class="full-width textarea"></textarea>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="footer">
-        <div class="form-footer">
-            <p-button label="Save" icon="pi pi-check" (click)="saveBook()" class="p-button-success"></p-button>
-            <p-button label="Cancel" icon="pi pi-times" (click)="bookDialog = false" class="p-button-secondary"></p-button>
-        </div>
-    </ng-template>
-</p-dialog>
 
-<p-dialog [(visible)]="viewDialog" [modal]="true" class="styled-dialog">
-    <ng-template pTemplate="header">
-        <h3 class="form-title">Book Details</h3>
-    </ng-template>
-    <ng-template pTemplate="content">
-        <div class="form-container">
-            <div class="form-group">
-                <h5>Class:</h5>
-                <p>{{ selectedBook?.class }}</p>
-            </div>
-            <div class="form-group">
-                <h5>Name:</h5>
-                <p>{{ selectedBook?.name }}</p>
-            </div>
-            <div class="form-group">
-                <h5>Description:</h5>
-                <p>{{ selectedBook?.description }}</p>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="footer">
-        <p-button label="Close" icon="pi pi-times" (click)="viewDialog = false" class="p-button-secondary"></p-button>
-    </ng-template>
-</p-dialog>
 
-<p-confirmDialog header="Delete Book" icon="pi pi-exclamation-circle text-red" class="red"></p-confirmDialog>
-<p-toast></p-toast>

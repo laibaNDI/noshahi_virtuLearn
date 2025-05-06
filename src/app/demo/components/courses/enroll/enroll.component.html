@@ -1,27 +1,64 @@
-<form (ngSubmit)="enroll()" #enrollForm="ngForm">
-    <label for="class">Class:</label>
-    <select id="class" [(ngModel)]="enrollmentData.class" name="class" required>
-      <option value="">Select Class</option>
-      <option value="Grade 9">Grade 9</option>
-      <option value="Grade 10">Grade 10</option>
-      <option value="Grade 11">Grade 11</option>
-      <option value="Grade 12">Grade 12</option>
+<!-- <div class="enroll-container">
+  <h2>Course Enrollment</h2>
+  
+  <form (ngSubmit)="enroll()">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" [(ngModel)]="enrollmentData.firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" [(ngModel)]="enrollmentData.lastName" name="lastName" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" [(ngModel)]="enrollmentData.email" name="email" required>
+
+    <label for="role">Role:</label>
+    <select id="role" [(ngModel)]="enrollmentData.role" name="role" required>
+      <option value="">Select Role</option>
+      <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
     </select>
-    <div *ngIf="enrollForm.submitted && !enrollmentData.class" style="color: red;">
-      Please select a class.
+
+    <div *ngIf="showRoleWarning" class="warning">Please select a role to enroll.</div>
+    
+    <button type="submit">Enroll</button>
+  </form>
+
+  <div *ngIf="showPopup" class="popup">
+    <div class="popup-content">
+      <h3>Enrollment Successful</h3>
+      <p>Thank you for enrolling!</p>
+      <button (click)="closePopup()">OK</button>
     </div>
+  </div>
+</div> -->
+<div class="enroll-container">
+  <h2>Course Enrollment</h2>
   
-    <label for="subjects">Subjects:</label>
-    <div *ngFor="let subject of availableSubjects">
-      <input
-        type="checkbox"
-        id="{{ subject }}"
-        [value]="subject"
-        [(ngModel)]="enrollmentData.subjects"
-        name="subjects"
-      />
-      <label for="{{ subject }}">{{ subject }}</label>
+  <form (ngSubmit)="enroll()">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" [(ngModel)]="enrollmentData.firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" [(ngModel)]="enrollmentData.lastName" name="lastName" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" [(ngModel)]="enrollmentData.email" name="email" required>
+
+    <label for="role">Role:</label>
+    <select id="role" [(ngModel)]="enrollmentData.role" name="role" required>
+      <option value="">Select Role</option>
+      <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+    </select>
+
+    <div *ngIf="showRoleWarning" class="warning">Please select a role to enroll.</div>
+    
+    <button type="submit">Enroll</button>
+  </form>
+
+  <div *ngIf="showPopup" class="popup">
+    <div class="popup-content">
+      <h3>Enrollment Successful</h3>
+      <p>Thank you for enrolling in Noshahi VirtuLearn!</p>
+      <button (click)="closePopup()">OK</button>
     </div>
-  
-    <button type="submit" [disabled]="enrollForm.invalid">Enroll</button>
-</form>
+  </div>
+</div>

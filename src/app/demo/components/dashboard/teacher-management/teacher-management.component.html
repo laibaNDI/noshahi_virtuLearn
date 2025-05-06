@@ -1,0 +1,30 @@
+<div class="teacher-management-container">
+    <h2>Teacher Management</h2>
+    <div class="add-teacher-form">
+      <input type="text" placeholder="Name" [(ngModel)]="newTeacher.name" />
+      <input type="text" placeholder="Subject" [(ngModel)]="newTeacher.subject" />
+      <input type="email" placeholder="Email" [(ngModel)]="newTeacher.email" />
+      <button (click)="addTeacher()">Add Teacher</button>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teacher of teachers">
+          <td>{{ teacher.name }}</td>
+          <td>{{ teacher.subject }}</td>
+          <td>{{ teacher.email }}</td>
+          <td><button (click)="deleteTeacher(teacher.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

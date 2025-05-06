@@ -1,33 +1,43 @@
-// enroll.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-enroll',
   templateUrl: './enroll.component.html',
+  styleUrls: ['./enroll.component.scss']
 })
 export class EnrollComponent {
   enrollmentData = {
-    class: '',
-    subjects: [],
-    role: '' // Role will determine if the user is a student or teacher
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: ''
   };
 
-  availableSubjects = ['Math', 'Physics', 'Chemistry', 'Biology'];
   roles = [
     { value: 'student', label: 'Student' },
     { value: 'teacher', label: 'Teacher' }
   ];
 
+  showPopup: boolean = false; // Controls popup visibility
+  showRoleWarning: boolean = false;
+
   constructor(private router: Router) {}
 
   enroll() {
+    if (!this.enrollmentData.role) {
+      this.showRoleWarning = true;
+      return;
+    }
+    this.showPopup = true;
+  }
+
+  closePopup() {
+    this.showPopup = false;
     if (this.enrollmentData.role === 'student') {
-      this.router.navigate(['/courses/view']); // Redirect to course view page
+      this.router.navigate(['/courses/view']);
     } else if (this.enrollmentData.role === 'teacher') {
-      this.router.navigate(['/courses/manage']); // Redirect to manage page
-    } else {
-      alert('Please select a role to enroll.');
+      this.router.navigate(['/courses/manage']);
     }
   }
 }

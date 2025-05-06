@@ -15,15 +15,19 @@ import { FormsModule } from '@angular/forms';
 import { CourseService } from './demo/service/course.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppLayoutModule, FormsModule, ConfirmDialogModule, ToastModule],
+    imports: [AppRoutingModule, AppLayoutModule, FormsModule, ConfirmDialogModule, ToastModule, BrowserAnimationsModule, HttpClientModule, // Ye line add karein
+    ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,CourseService
+        PhotoService, ProductService,CourseService, MessageService
     ],
     bootstrap: [AppComponent],
 
