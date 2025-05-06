@@ -1,0 +1,99 @@
+<div class="student-progress-dashboard">
+    <h2>Class Progress</h2>
+  
+    <div class="filters-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+      <input pInputText type="text" placeholder="Search Students" [(ngModel)]="searchTerm" style="width: 250px;" />
+  
+      <div style="display: flex; gap: 10px;">
+        <p-dropdown [options]="grades" [(ngModel)]="selectedGrade" placeholder="Select Grade" optionLabel="label"></p-dropdown>
+  
+        <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject" placeholder="Select Subject" optionLabel="label"></p-dropdown>
+  
+        <p-dropdown [options]="sections" [(ngModel)]="selectedSection" placeholder="Select Section" optionLabel="label"></p-dropdown>
+      </div>
+    </div>
+  
+    <div class="summary-container" style="margin-bottom: 20px;">
+      <p>
+        <strong>Class:</strong> Grade {{ selectedGrade || '-' }},
+        <strong>Subject:</strong> {{ selectedSubject || '-' }},
+        <strong>Section:</strong> {{ selectedSection || '-' }},
+        <strong>Total Students:</strong> {{ getFilteredStudents().length }},
+        <strong>Total Lessons:</strong> {{ getTotalLessons(selectedSubject) }}
+      </p>
+    </div>
+  
+    <p-table [value]="getFilteredStudents()">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Serial</th>
+          <th>Student Name</th>
+          <th>Topic Name</th>
+          <th>Quiz Progress</th>
+          <th>Video Progress</th>
+          <th>Notes Progress</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-student let-i="index">
+        <tr *ngFor="let topic of student.topics; let idx = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ topic.name }}</td>
+          <td>
+            <p-progressBar [value]="(topic.quizAttempts / 5) * 100" [showValue]="true" (click)="openTopicDetail(topic)"></p-progressBar>
+          </td>
+          <td>
+            <p-progressBar [value]="(topic.videoWatched ? 100 : 0)" [showValue]="true" (click)="openTopicDetail(topic)"></p-progressBar>
+          </td>
+          <td>
+            <p-progressBar [value]="(topic.notesRead ? 100 : 0)" [showValue]="true" (click)="openTopicDetail(topic)"></p-progressBar>
+          </td>
+          <td>
+            <button pButton label="View Details" (click)="openStudentProgress(student)" class="p-button-sm"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  
+    <p-dialog header="Topic Details" [(visible)]="topicModalVisible" [modal]="true" [style]="{ width: '50vw' }" [closable]="true">
+      <div *ngIf="selectedTopic">
+        <h3>{{ selectedTopic?.name }}</h3>
+        <p><strong>Quiz Attempts:</strong> {{ selectedTopic?.quizAttempts }}</p>
+        <p><strong>Videos Watched:</strong> {{ selectedTopic?.videoWatched ? 'Yes' : 'No' }}</p>
+        <p><strong>Notes Read:</strong> {{ selectedTopic?.notesRead ? 'Yes' : 'No' }}</p>
+      </div>
+    </p-dialog>
+  
+    <p-dialog header="Student Progress" [(visible)]="progressModalVisible" [modal]="true" [style]="{ width: '70vw' }" [closable]="true">
+      <h3>Student: {{ selectedStudent?.name }}</h3>
+      <p>Grade: {{ selectedStudent?.grade }}</p>
+      <p>Subject: {{ selectedStudent?.subject }}</p>
+  
+      <p-accordion>
+        <p-accordionTab header="Quiz Progress">
+          <p-progressBar [value]="selectedStudent?.quizProgress" [showValue]="true"></p-progressBar>
+          <span>{{ selectedStudent?.quizProgress }}%</span>
+        </p-accordionTab>
+  
+        <p-accordionTab header="Video Progress">
+          <p-progressBar [value]="selectedStudent?.videoProgress" [showValue]="true"></p-progressBar>
+          <span>{{ selectedStudent?.videoProgress }}%</span>
+        </p-accordionTab>
+  
+        <p-accordionTab header="Activity Progress">
+          <p-progressBar [value]="selectedStudent?.activityProgress" [showValue]="true"></p-progressBar>
+          <span>{{ selectedStudent?.activityProgress }}%</span>
+        </p-accordionTab>
+  
+        <p-accordionTab header="Details">
+          <p><strong>Total Marks Obtained:</strong> {{ selectedStudent?.totalMarks }} / 100</p>
+          <p><strong>Quiz Attempts:</strong> {{ selectedStudent?.quizAttempts }}</p>
+          <p><strong>Video Watched:</strong> {{ selectedStudent?.videoWatched ? 'Yes' : 'No' }}</p>
+          <p><strong>Notes Read:</strong> {{ selectedStudent?.notesRead ? 'Yes' : 'No' }}</p>
+        </p-accordionTab>
+      </p-accordion>
+    </p-dialog>
+  </div>
+  

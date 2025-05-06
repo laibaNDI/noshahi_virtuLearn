@@ -1,0 +1,19 @@
+.role-option {
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-option.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.role-option:hover {
+  border-color: var(--primary-color);
+}

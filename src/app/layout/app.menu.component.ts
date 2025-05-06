@@ -1,6 +1,7 @@
 // import { OnInit } from '@angular/core';
 // import { Component } from '@angular/core';
 // import { LayoutService } from './service/app.layout.service';
+// import { AuthService } from './service/auth.service';
 
 // @Component({
 //     selector: 'app-menu',
@@ -10,166 +11,111 @@
 
 //     model: any[] = [];
 
-//     constructor(public layoutService: LayoutService) { }
+//     constructor(
+//         public layoutService: LayoutService,
+//         private authService: AuthService
+//     ) {}
 
 //     ngOnInit() {
-//         this.model = [
+//         const userRole = this.authService.getUserRole(); // 'Principal', 'Teacher', 'Student', etc.
+
+//         const fullMenu = [
 //             {
-//                 label: 'Home',
+//                 label: 'Dashboard',
 //                 items: [
-//                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+//                     { label: 'Principal Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/principal-dashboard'], roles: ['Principal'] },
+//                     { label: 'Teacher Dashboard', icon: 'pi pi-fw pi-id-card', routerLink: ['/teacher-dashboard'], roles: ['Teacher'] },
+//                     { label: 'Student Dashboard', icon: 'pi pi-fw pi-user', routerLink: ['/student-dashboard'], roles: ['Student'] }
 //                 ]
 //             },
 //             {
-//                 label: 'UI Components',
+//                 label: 'Student Management',
 //                 items: [
-//                     { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },
-//                     { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
-//                     { label: 'Student', icon: 'pi pi-fw pi-user', routerLink: ['/uikit/student'] },
-//                     { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
-//                     { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate'] },
-//                     { label: 'Button', icon: 'pi pi-fw pi-box', routerLink: ['/uikit/button'] },
-//                     { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
-//                     { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
-//                     { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },
-//                     { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
-//                     { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/uikit/overlay'] },
-//                     { label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media'] },
-//                     { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'], routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' } },
-//                     { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message'] },
-//                     { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file'] },
-//                     { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
-//                     { label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/uikit/misc'] }
+//                     { label: 'Student Profiles', icon: 'pi pi-fw pi-users', routerLink: ['/student-management'], roles: ['Admin', 'Principal'] },
+//                     { label: 'Student Enrollment', icon: 'pi pi-fw pi-pencil', routerLink: ['/student-enrollment'], roles: ['Principal'] },
+//                     { label: 'Progress Reports', icon: 'pi pi-fw pi-chart-line', routerLink: ['/student-progress'], roles: ['Principal', 'Teacher'] }
 //                 ]
 //             },
 //             {
-//                 label: 'Prime Blocks',
+//                 label: 'Teacher Management',
 //                 items: [
-//                     { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-//                     { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
+//                     { label: 'Teacher Profiles', icon: 'pi pi-fw pi-user-edit', routerLink: ['/teacher-management'], roles: ['Admin', 'Principal'] },
+//                     { label: 'Assign Courses', icon: 'pi pi-fw pi-book', routerLink: ['/assign-courses'], roles: ['Principal'] },
+//                     { label: 'Teacher Performance', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/teacher-performance'], roles: ['Principal'] }
 //                 ]
 //             },
 //             {
-//                 label: 'Utilities',
+//                 label: 'Courses',
 //                 items: [
-//                     { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', routerLink: ['/utilities/icons'] },
-//                     { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://www.primefaces.org/primeflex/'], target: '_blank' },
+//                     { label: 'Manage Courses', icon: 'pi pi-fw pi-bookmark', routerLink: ['/courses/manage'], roles: ['Principal', 'Teacher'] },
+//                     { label: 'View Courses', icon: 'pi pi-fw pi-folder-open', routerLink: ['/courses/view'], roles: ['Principal', 'Teacher', 'Student'] },
+//                     { label: 'Course Enrollment', icon: 'pi pi-fw pi-list', routerLink: ['/courses/enroll'], roles: ['Principal', 'Student'] }
 //                 ]
 //             },
 //             {
-//                 label: 'Pages',
-//                 icon: 'pi pi-fw pi-briefcase',
+//                 label: 'Assignments & Quizzes',
 //                 items: [
-//                     {
-//                         label: 'Landing',
-//                         icon: 'pi pi-fw pi-globe',
-//                         routerLink: ['/landing']
-//                     },
-//                     {
-//                         label: 'Auth',
-//                         icon: 'pi pi-fw pi-user',
-//                         items: [
-//                             {
-//                                 label: 'Login',
-//                                 icon: 'pi pi-fw pi-sign-in',
-//                                 routerLink: ['/auth/login']
-//                             },
-//                             {
-//                                 label: 'Error',
-//                                 icon: 'pi pi-fw pi-times-circle',
-//                                 routerLink: ['/auth/error']
-//                             },
-//                             {
-//                                 label: 'Access Denied',
-//                                 icon: 'pi pi-fw pi-lock',
-//                                 routerLink: ['/auth/access']
-//                             }
-//                         ]
-//                     },
-//                     {
-//                         label: 'Crud',
-//                         icon: 'pi pi-fw pi-pencil',
-//                         routerLink: ['/pages/crud']
-//                     },
-//                     {
-//                         label: 'Timeline',
-//                         icon: 'pi pi-fw pi-calendar',
-//                         routerLink: ['/pages/timeline']
-//                     },
-//                     {
-//                         label: 'Not Found',
-//                         icon: 'pi pi-fw pi-exclamation-circle',
-//                         routerLink: ['/notfound']
-//                     },
-//                     {
-//                         label: 'Empty',
-//                         icon: 'pi pi-fw pi-circle-off',
-//                         routerLink: ['/pages/empty']
-//                     },
+//                     { label: 'Create Assignment', icon: 'pi pi-fw pi-file', routerLink: ['/create-assignment'], roles: ['Teacher'] },
+//                     { label: 'View Assignments', icon: 'pi pi-fw pi-eye', routerLink: ['/view-assignments'], roles: ['Teacher', 'Student'] },
+//                     { label: 'Conduct Quiz', icon: 'pi pi-fw pi-question-circle', routerLink: ['/conduct-quiz'], roles: ['Teacher'] },
+//                     { label: 'Quiz Results', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/quiz-results'], roles: ['Teacher', 'Student'] }
 //                 ]
 //             },
 //             {
-//                 label: 'Hierarchy',
+//                 label: 'Exams',
 //                 items: [
-//                     {
-//                         label: 'Submenu 1', icon: 'pi pi-fw pi-bookmark',
-//                         items: [
-//                             {
-//                                 label: 'Submenu 1.1', icon: 'pi pi-fw pi-bookmark',
-//                                 items: [
-//                                     { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-//                                     { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-//                                     { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' },
-//                                 ]
-//                             },
-//                             {
-//                                 label: 'Submenu 1.2', icon: 'pi pi-fw pi-bookmark',
-//                                 items: [
-//                                     { label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }
-//                                 ]
-//                             },
-//                         ]
-//                     },
-//                     {
-//                         label: 'Submenu 2', icon: 'pi pi-fw pi-bookmark',
-//                         items: [
-//                             {
-//                                 label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-//                                 items: [
-//                                     { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-//                                     { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-//                                 ]
-//                             },
-//                             {
-//                                 label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-//                                 items: [
-//                                     { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-//                                 ]
-//                             },
-//                         ]
-//                     }
+//                     { label: 'Schedule Exam', icon: 'pi pi-fw pi-calendar', routerLink: ['/schedule-exam'], roles: ['Principal', 'Teacher'] },
+//                     { label: 'View Exam Results', icon: 'pi pi-fw pi-chart-line', routerLink: ['/exam-results'], roles: ['Principal', 'Teacher', 'Student'] }
 //                 ]
 //             },
 //             {
-//                 label: 'Get Started',
+//                 label: 'Reports',
 //                 items: [
-//                     {
-//                         label: 'Documentation', icon: 'pi pi-fw pi-question', routerLink: ['/documentation']
-//                     },
-//                     {
-//                         label: 'View Source', icon: 'pi pi-fw pi-search', url: ['https://github.com/primefaces/sakai-ng'], target: '_blank'
-//                     }
+//                     { label: 'Student Performance', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/student-performance'], roles: ['Principal'] },
+//                     { label: 'Teacher Performance', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/teacher-performance'], roles: ['Principal'] }
+//                 ]
+//             },
+//             {
+//                 label: 'Communication',
+//                 items: [
+//                     { label: 'Messages', icon: 'pi pi-fw pi-comments', routerLink: ['/messages'], roles: ['Principal', 'Teacher', 'Student'] },
+//                     { label: 'Notifications', icon: 'pi pi-fw pi-bell', routerLink: ['/notifications'], roles: ['Principal', 'Teacher', 'Student'] }
+//                 ]
+//             },
+//             {
+//                 label: 'Settings',
+//                 items: [
+//                     { label: 'Platform Settings', icon: 'pi pi-fw pi-cog', routerLink: ['/settings'], roles: ['Admin'] },
+//                     { label: 'User Management', icon: 'pi pi-fw pi-users', routerLink: ['/user-management'], roles: ['Admin'] }
+//                 ]
+//             },
+//             {
+//                 label: 'Support',
+//                 items: [
+//                     { label: 'Documentation', icon: 'pi pi-fw pi-question', routerLink: ['/documentation'], roles: ['Admin', 'Principal', 'Teacher', 'Student'] },
+//                     { label: 'Contact Support', icon: 'pi pi-fw pi-envelope', routerLink: ['/contact-support'], roles: ['Admin', 'Principal', 'Teacher', 'Student'] }
 //                 ]
 //             }
 //         ];
+
+//         this.model = this.filterMenuByRole(fullMenu, userRole);
+//     }
+
+//     filterMenuByRole(menu: any[], role: string): any[] {
+//         return menu
+//             .map(section => {
+//                 const filteredItems = section.items.filter(item => item.roles?.includes(role));
+//                 return filteredItems.length > 0 ? { ...section, items: filteredItems } : null;
+//             })
+//             .filter(section => section !== null);
 //     }
 // }
 
 
 
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { AuthService } from './service/auth.service';
 
 @Component({
     selector: 'app-menu',
@@ -179,86 +125,97 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(
+        public layoutService: LayoutService,
+        private authService: AuthService
+    ) {}
 
     ngOnInit() {
-        this.model = [
+        const role = this.authService.getUserRole(); // e.g. 'Principal', 'Teacher', 'Student'
+
+        const allMenus = this.getMenuItems();
+
+        this.model = this.filterByRole(allMenus, role);
+    }
+
+    private getMenuItems(): any[] {
+        return [
             {
                 label: 'Dashboard',
                 items: [
-                    { label: 'Principal Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/principal-dashboard'] },
-                    { label: 'Teacher Dashboard', icon: 'pi pi-fw pi-id-card', routerLink: ['/teacher-dashboard'] }, // Verified icon
-                    { label: 'Student Dashboard', icon: 'pi pi-fw pi-user', routerLink: ['/student-dashboard'] }
+                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'], roles: ['Admin', 'Principal', 'Teacher', 'Student'] }
                 ]
             },
             {
                 label: 'Student Management',
                 items: [
-                    { label: 'Student Profiles', icon: 'pi pi-fw pi-users', routerLink: ['/student-management'] },
-                    { label: 'Student Enrollment', icon: 'pi pi-fw pi-pencil', routerLink: ['/student-enrollment'] },
-                    { label: 'Progress Reports', icon: 'pi pi-fw pi-chart-line', routerLink: ['/student-progress'] }
+                    { label: 'Profiles', icon: 'pi pi-fw pi-users', routerLink: ['/student-management'], roles: ['Admin', 'Principal'] },
+                    { label: 'Enrollment', icon: 'pi pi-fw pi-pencil', routerLink: ['/student-enrollment'], roles: ['Principal'] },
+                    { label: 'Progress', icon: 'pi pi-fw pi-chart-line', routerLink: ['/student-progress'], roles: ['Principal', 'Teacher'] }
                 ]
             },
             {
                 label: 'Teacher Management',
                 items: [
-                    { label: 'Teacher Profiles', icon: 'pi pi-fw pi-user-edit', routerLink: ['/teacher-management'] },
-                    { label: 'Assign Courses', icon: 'pi pi-fw pi-book', routerLink: ['/assign-courses'] },
-                    { label: 'Teacher Performance', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/teacher-performance'] }
+                    { label: 'Profiles', icon: 'pi pi-fw pi-user-edit', routerLink: ['/teacher-management'], roles: ['Admin', 'Principal'] },
+                    { label: 'Assign Courses', icon: 'pi pi-fw pi-book', routerLink: ['/assign-courses'], roles: ['Principal'] },
+                    { label: 'Performance', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/teacher-performance'], roles: ['Principal'] }
                 ]
             },
             {
                 label: 'Courses',
                 items: [
-                    { label: 'Manage Courses', icon: 'pi pi-fw pi-bookmark', routerLink: ['/courses/manage'] },
-                    { label: 'View Courses', icon: 'pi pi-fw pi-folder-open', routerLink: ['/courses/view'] }, // Verified icon
-                    { label: 'Course Enrollment', icon: 'pi pi-fw pi-list', routerLink: ['/courses/enroll'] }
+                    { label: 'Manage', icon: 'pi pi-fw pi-bookmark', routerLink: ['/courses/manage'], roles: ['Principal', 'Teacher'] },
+                    { label: 'View', icon: 'pi pi-fw pi-folder-open', routerLink: ['/courses/view'], roles: ['Principal', 'Teacher', 'Student'] },
+                    { label: 'Enrollment', icon: 'pi pi-fw pi-list', routerLink: ['/courses/enroll'], roles: ['Principal', 'Student'] }
                 ]
             },
             {
                 label: 'Assignments & Quizzes',
                 items: [
-                    { label: 'Create Assignment', icon: 'pi pi-fw pi-file', routerLink: ['/create-assignment'] },
-                    { label: 'View Assignments', icon: 'pi pi-fw pi-eye', routerLink: ['/view-assignments'] },
-                    { label: 'Conduct Quiz', icon: 'pi pi-fw pi-question-circle', routerLink: ['/conduct-quiz'] },
-                    { label: 'Quiz Results', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/quiz-results'] }
+                    { label: 'Create Assignment', icon: 'pi pi-fw pi-file', routerLink: ['/create-assignment'], roles: ['Teacher'] },
+                    { label: 'View Assignments', icon: 'pi pi-fw pi-eye', routerLink: ['/view-assignments'], roles: ['Teacher', 'Student'] },
+                    { label: 'Conduct Quiz', icon: 'pi pi-fw pi-question-circle', routerLink: ['/conduct-quiz'], roles: ['Teacher'] },
+                    { label: 'Quiz Results', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/quiz-results'], roles: ['Teacher', 'Student'] }
                 ]
             },
             {
                 label: 'Exams',
                 items: [
-                    { label: 'Schedule Exam', icon: 'pi pi-fw pi-calendar', routerLink: ['/schedule-exam'] },
-                    { label: 'View Exam Results', icon: 'pi pi-fw pi-chart-line', routerLink: ['/exam-results'] }
-                ]
-            },
-            {
-                label: 'Reports',
-                items: [
-                    { label: 'Student Performance', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/student-performance'] },
-                    { label: 'Teacher Performance', icon: 'pi pi-fw pi-chart-pie', routerLink: ['/teacher-performance'] }
+                    { label: 'Schedule Exam', icon: 'pi pi-fw pi-calendar', routerLink: ['/schedule-exam'], roles: ['Principal', 'Teacher'] },
+                    { label: 'Exam Results', icon: 'pi pi-fw pi-chart-line', routerLink: ['/exam-results'], roles: ['Principal', 'Teacher', 'Student'] }
                 ]
             },
             {
                 label: 'Communication',
                 items: [
-                    { label: 'Messages', icon: 'pi pi-fw pi-comments', routerLink: ['/messages'] },
-                    { label: 'Notifications', icon: 'pi pi-fw pi-bell', routerLink: ['/notifications'] }
+                    { label: 'Messages', icon: 'pi pi-fw pi-comments', routerLink: ['/messages'], roles: ['Principal', 'Teacher', 'Student'] },
+                    { label: 'Notifications', icon: 'pi pi-fw pi-bell', routerLink: ['/notifications'], roles: ['Principal', 'Teacher', 'Student'] }
                 ]
             },
             {
                 label: 'Settings',
                 items: [
-                    { label: 'Platform Settings', icon: 'pi pi-fw pi-cog', routerLink: ['/settings'] },
-                    { label: 'User Management', icon: 'pi pi-fw pi-users', routerLink: ['/user-management'] }
+                    { label: 'Platform Settings', icon: 'pi pi-fw pi-cog', routerLink: ['/settings'], roles: ['Admin'] },
+                    { label: 'User Management', icon: 'pi pi-fw pi-users', routerLink: ['/user-management'], roles: ['Admin'] }
                 ]
             },
             {
                 label: 'Support',
                 items: [
-                    { label: 'Documentation', icon: 'pi pi-fw pi-question', routerLink: ['/documentation'] },
-                    { label: 'Contact Support', icon: 'pi pi-fw pi-envelope', routerLink: ['/contact-support'] }
+                    { label: 'Documentation', icon: 'pi pi-fw pi-question', routerLink: ['/documentation'], roles: ['Admin', 'Principal', 'Teacher', 'Student'] },
+                    { label: 'Contact Support', icon: 'pi pi-fw pi-envelope', routerLink: ['/contact-support'], roles: ['Admin', 'Principal', 'Teacher', 'Student'] }
                 ]
             }
         ];
+    }
+
+    private filterByRole(menu: any[], role: string): any[] {
+        return menu
+            .map(section => {
+                const allowedItems = section.items.filter(item => item.roles.includes(role));
+                return allowedItems.length > 0 ? { ...section, items: allowedItems } : null;
+            })
+            .filter(section => section !== null);
     }
 }

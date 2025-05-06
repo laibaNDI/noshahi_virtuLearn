@@ -1,0 +1,56 @@
+<p-confirmDialog></p-confirmDialog>
+
+<div class="enrollment-container">
+  <h2>Student Enrollment</h2>
+
+  <form #studentForm="ngForm">
+    <!-- Student Name Input -->
+    <div class="p-field">
+      <label for="studentName">Student Name</label>
+      <input id="studentName" type="text" class="p-inputtext" #studentName placeholder="Enter student name" />
+    </div>
+
+    <!-- Select Grade Dropdown -->
+    <div class="p-field">
+      <label for="grade">Select Grade</label>
+      <select id="grade" class="p-dropdown" #grade>
+        <option value="">Select Grade</option>
+        <option value="6">Grade 6</option>
+        <option value="7">Grade 7</option>
+        <option value="8">Grade 8</option>
+      </select>
+    </div>
+
+    <!-- Enrollment Date Input -->
+    <div class="p-field">
+      <label for="enrollmentDate">Enrollment Date</label>
+      <input id="enrollmentDate" type="date" class="p-calendar" #enrollmentDate />
+    </div>
+
+    <button type="button" class="p-button p-button-success" (click)="enrollStudent()">Enroll Student</button>
+  </form>
+
+  <h3>Enrolled Students</h3>
+  <table class="p-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Grade</th>
+        <th>Enrollment Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>{{ student.grade }}</td>
+        <td>{{ student.enrollmentDate }}</td>
+        <td>
+          <button class="p-button p-button-danger" (click)="confirmDelete(student)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p-toast></p-toast>
+</div>
